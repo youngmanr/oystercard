@@ -11,4 +11,7 @@ class Oystercard
     ((@balance + amount) > TOP_UP_LIMIT) ? (raise "Top up limit #{TOP_UP_LIMIT} exceeded") : (@balance += amount)
   end
 
+  def deduct fare
+  	@balance -= fare
+  end
 end
