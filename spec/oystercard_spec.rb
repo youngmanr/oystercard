@@ -17,4 +17,16 @@ describe Oystercard do
   	subject.top_up(10)
   	expect(subject.deduct(10)).to eq 0
   end
+
+  it 'touch_in' do
+    expect(subject.touch_in).to eq true
+  end
+
+  it 'touch_out' do
+    expect(subject.touch_out).to eq false
+  end
+
+  it 'in_journey?' do
+    expect(subject.in_journey?).to eq false
+  end
 end
