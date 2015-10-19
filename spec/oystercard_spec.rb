@@ -9,4 +9,7 @@ describe Oystercard do
   	expect(subject.top_up(10)).to eq (10)
   end
 
+  it 'top up exceeds limit' do
+    expect{subject.top_up(Oystercard::TOP_UP_LIMIT+1)}.to raise_error "Top up limit #{Oystercard::TOP_UP_LIMIT} exceeded"
+  end
 end
