@@ -19,7 +19,12 @@ describe Oystercard do
   end
 
   it 'touch_in' do
+  	subject.top_up(Oystercard::MIN_BALANCE)
     expect(subject.touch_in).to eq true
+  end
+
+  it 'raises an error when balance is smaller than minimum fair' do
+  	expect{subject.touch_in}.to raise_error "Insufficient funds"
   end
 
   it 'touch_out' do
