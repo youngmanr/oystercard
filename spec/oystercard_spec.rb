@@ -13,13 +13,8 @@ describe Oystercard do
     expect{subject.top_up(Oystercard::TOP_UP_LIMIT+1)}.to raise_error "Top up limit #{Oystercard::TOP_UP_LIMIT} exceeded"
   end
 
-  it 'deducts fare from balance' do
-  	subject.top_up(10)
-  	expect(subject.deduct(10)).to eq 0
-  end
-
   it 'touch_in' do
-  	subject.top_up(Oystercard::MIN_BALANCE)
+  	subject.top_up(Oystercard::MIN_FARE)
     expect(subject.touch_in).to eq true
   end
 
@@ -29,6 +24,10 @@ describe Oystercard do
 
   it 'touch_out' do
     expect(subject.touch_out).to eq false
+  end
+
+  it 'touch_out reduces balance by MIN_FARE' do
+    expect{subject.touch_out}.to change{subject.balance}.by(-Oystercard::MIN_FARE)
   end
 
   it 'in_journey?' do
